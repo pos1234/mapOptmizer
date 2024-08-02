@@ -31,7 +31,7 @@ const Map = ({ locations, optimizedPath, saveLocation, onMarkerClick }: any) => 
       click(event) {
         const { lat, lng } = event.latlng;
         if (lat !== undefined && lng !== undefined) {
-          const newMarker = { id: new Date(), lat, lng };
+          const newMarker = { id: new Date().toISOString(), lat, lng }; // Use ISO string for unique id
           const updatedMarkers = [...markers, newMarker];
           setMarkers(updatedMarkers);
           onMarkerClick(updatedMarkers);
@@ -83,15 +83,15 @@ const Map = ({ locations, optimizedPath, saveLocation, onMarkerClick }: any) => 
         ))}
 
         {/* Display optimized path */}
-        {optimizedPath.length > 1 && (
-          <Polyline
-            positions={optimizedPath.map((loc: Location) => [loc.latitude, loc.longitude] as [number, number])}
-            color="blue"
-            weight={4}
-          />
-        )}
+        {/* {optimizedPath.length > 0 && (
+        )} */}
+        <Polyline
+          positions={optimizedPath.map((loc: any) => [loc.lat, loc.lng] as [number, number])}
+          color="blue"
+          weight={4}
+        />
       </MapContainer>
-      <button
+      <button className='bg-blue-500 p-2 rounded-md text-white cursor-pointer w-40 self-end mt-5'
         onClick={() => {
           if (markers.length > 0) {
             const lastMarker = markers[markers.length - 1];
@@ -115,10 +115,10 @@ const Map = ({ locations, optimizedPath, saveLocation, onMarkerClick }: any) => 
   );
 };
 
-
 export default Map;
+
 type Location = {
-  id: number;
+  id: string;
   name: string;
   latitude: number;
   longitude: number;
