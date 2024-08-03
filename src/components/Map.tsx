@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
