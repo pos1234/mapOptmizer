@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Map from '../components/Map';
-import findShortestPath from '../utils/shortestPath';
-
+const Map = dynamic(() => import("../components/Map"), {
+  ssr: false
+});
 type Location = {
   id: number;
   name: string;
